@@ -1,2 +1,2 @@
 # Udemy
-Courses taken from Udemy
+Courses taken from Udemy and its projects
