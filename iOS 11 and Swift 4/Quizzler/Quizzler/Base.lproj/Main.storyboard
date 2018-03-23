@@ -160,10 +160,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="falseButton" destination="T5N-xc-sVz" id="HP2-MK-a2g"/>
                         <outlet property="progressBar" destination="Dsa-Z7-OdN" id="Jep-Z7-uzr"/>
                         <outlet property="progressLabel" destination="qil-6C-XPA" id="vOI-gf-aRi"/>
                         <outlet property="questionLabel" destination="4GJ-Ce-brK" id="fcP-zD-Zkq"/>
                         <outlet property="scoreLabel" destination="c0R-Fj-fUI" id="31D-zq-NpU"/>
+                        <outlet property="trueButton" destination="exB-ZS-1U0" id="HhS-Tq-XRX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

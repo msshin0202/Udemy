@@ -35,12 +35,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
+    var storyIndex : Int = 1
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+        storyTextView.text = story1
         
         
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
@@ -50,6 +53,35 @@ class ViewController: UIViewController {
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        if (storyIndex == 1){
+            if (sender.tag == 1){
+                storyThree()
+            }
+            else if (sender.tag == 2){
+                storyTwo()
+            }
+        }
+        
+        else if (storyIndex == 2){
+            if (sender.tag == 1){
+                storyThree()
+            }
+            else if (sender.tag == 2){
+                storyFour()
+            }
+            
+        }
+        
+        else if (storyIndex == 3){
+            if (sender.tag == 1){
+                storySix()
+            }
+            else if (sender.tag == 2){
+                storyFive()
+            }
+        }
+        
     
         // TODO Step 4: Write an IF-Statement to update the views
                 
@@ -57,6 +89,49 @@ class ViewController: UIViewController {
         
     
     }
+    
+    func storyTwo(){
+        topButton.setTitle(answer2a, for: .normal)
+        bottomButton.setTitle(answer2b, for: .normal)
+        storyTextView.text = story2
+        storyIndex = 2
+    }
+    
+    func storyThree(){
+        topButton.setTitle(answer3a, for: .normal)
+        bottomButton.setTitle(answer3b, for: .normal)
+        storyTextView.text = story3
+        storyIndex = 3
+    }
+    
+    func storyFour(){
+        storyTextView.text = story4
+        topButton.setTitle("Restart", for: .normal)
+        bottomButton.setTitle("Thank you for Playing!", for: .normal)
+        bottomButton.isEnabled = false
+        storyIndex = 1
+        
+        
+    }
+    
+    func storyFive(){
+        storyTextView.text = story5
+        topButton.setTitle("Restart", for: .normal)
+        bottomButton.setTitle("Thank you for Playing!", for: .normal)
+        bottomButton.isEnabled = false
+        storyIndex = 1
+        
+    }
+    
+    func storySix(){
+        storyTextView.text = story6
+        topButton.setTitle("Restart", for: .normal)
+        bottomButton.setTitle("Thank you for Playing!", for: .normal)
+        bottomButton.isEnabled = false
+        storyIndex = 1
+        
+    }
+    
     
 
 
