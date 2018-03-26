@@ -110,8 +110,7 @@ class ViewController: UIViewController {
     func storyFour(){
         storyTextView.text = story4
         topButton.setTitle("Restart", for: .normal)
-        bottomButton.setTitle("Thank you for Playing!", for: .normal)
-        bottomButton.isEnabled = false
+        bottomButton.isHidden = true
         storyIndex = 0
         
         
@@ -120,8 +119,7 @@ class ViewController: UIViewController {
     func storyFive(){
         storyTextView.text = story5
         topButton.setTitle("Restart", for: .normal)
-        bottomButton.setTitle("Thank you for Playing!", for: .normal)
-        bottomButton.isEnabled = false
+        bottomButton.isHidden = true
         storyIndex = 0
         
     }
@@ -129,8 +127,7 @@ class ViewController: UIViewController {
     func storySix(){
         storyTextView.text = story6
         topButton.setTitle("Restart", for: .normal)
-        bottomButton.setTitle("Thank you for Playing!", for: .normal)
-        bottomButton.isEnabled = false
+        bottomButton.isHidden = true
         storyIndex = 0
         
     }
@@ -139,7 +136,7 @@ class ViewController: UIViewController {
         storyTextView.text = story1
         topButton.setTitle(answer1a, for: .normal)
         bottomButton.setTitle(answer1b, for: .normal)
-        bottomButton.isEnabled = true
+        bottomButton.isHidden = false
         storyIndex = 1
     }
     
