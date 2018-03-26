@@ -53,8 +53,11 @@ class ViewController: UIViewController {
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
+        if (storyIndex == 0){
+            restart()
+        }
         
-        if (storyIndex == 1){
+        else if (storyIndex == 1){
             if (sender.tag == 1){
                 storyThree()
             }
@@ -109,7 +112,7 @@ class ViewController: UIViewController {
         topButton.setTitle("Restart", for: .normal)
         bottomButton.setTitle("Thank you for Playing!", for: .normal)
         bottomButton.isEnabled = false
-        storyIndex = 1
+        storyIndex = 0
         
         
     }
@@ -119,7 +122,7 @@ class ViewController: UIViewController {
         topButton.setTitle("Restart", for: .normal)
         bottomButton.setTitle("Thank you for Playing!", for: .normal)
         bottomButton.isEnabled = false
-        storyIndex = 1
+        storyIndex = 0
         
     }
     
@@ -128,8 +131,16 @@ class ViewController: UIViewController {
         topButton.setTitle("Restart", for: .normal)
         bottomButton.setTitle("Thank you for Playing!", for: .normal)
         bottomButton.isEnabled = false
-        storyIndex = 1
+        storyIndex = 0
         
+    }
+    
+    func restart(){
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+        bottomButton.isEnabled = true
+        storyIndex = 1
     }
     
     
