@@ -10,19 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var answerWindow: UILabel!
-    var currentNum : String = "0"
-    var firstArg : String = ""
-    var secondArg : String = ""
-    var operationArg : String = ""
-    var countParam : Int = 0
-    var currResult : Int = 0
-    var numOperatorPressed : Int = 0
+    @IBOutlet weak var numOnScreen: UILabel!
+    var numCumulator : String = ""
+    var resultCumulator : String = ""
+    var performingCalc : Bool = false
+    var previousNum : String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        answerWindow.text = "0"
+        numOnScreen.text = "0"
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -31,93 +29,44 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func numberPressed(_ sender: UIButton) {
-        displayNum(sender.tag)
-    }
-    
-    func displayNum(_ tagNum : Int){
-        if (currentNum == "0"){
-            currentNum = "\(tagNum)"
+        if (numOnScreen.text == "0"){
+            numOnScreen.text = String(sender.tag)
         } else {
-            currentNum += "\(tagNum)"
+            numOnScreen.text = numOnScreen.text! + String(sender.tag)
         }
-        if (countParam == 1){
-            secondArg = currentNum
-        }
-        answerWindow.text = currentNum
-    
     }
     
     @IBAction func operatorPressed(_ sender: UIButton) {
-        if (numOperatorPressed > 1) { // do nothing
+        if (isFirstOperation()) {
+            previousNum = numOnScreen.text!
             
-        } else if (sender.tag == 10) { // divide button pressed
-            operationArg = "÷"
-            performOperations()
-        } else if (sender.tag == 11){ // multiply button pressed
-            operationArg = "x"
-            performOperations()
-        } else if (sender.tag == 12){ // subtract button pressed
-            operationArg = "-"
-            performOperations()
-        } else if (sender.tag == 13){ // addition button pressed
-            operationArg = "+"
-            performOperations()
-        } else if (sender.tag == 14){ // equal button pressed
-            calculate()
-            countParam = 0
-            operationArg = ""
+            return
         }
-        numOperatorPressed += 1
+        else if (sender.tag == 10 && performingCalc == true){
+            resultCumulator = String(Int(previousNum)! / Int(numOnScreen.text!)!)
+            numOnScreen.text = resultCumulator
+            previousNum = resultCumulator
+            return
+        }
+
+        
         
     }
     
-    func calculate(){
-        if (operationArg == "÷"){
-            currResult = Int(firstArg)! / Int(secondArg)!
-        } else if (operationArg == "x"){
-            currResult = Int(firstArg)! * Int(secondArg)!
-        } else if (operationArg == "-"){
-            currResult = Int(firstArg)! - Int(secondArg)!
-        } else if (operationArg == "+"){
-            currResult = Int(firstArg)! + Int(secondArg)!
-        }
-        answerWindow.text = "\(currResult)"
-        numOperatorPressed = 0
-    }
-    
-    func performOperations(){
-        if (countParam == 0){
-            firstArg = answerWindow.text!
-            countParam = 1
-            clearCurrNum()
+    func isFirstOperation() -> Bool {
+        if (performingCalc == true) {
+            return true
         } else {
-            calculate()
-            firstArg = "\(currResult)"
-            countParam = 0
-            clearCurrNum()
+            performingCalc = true
+            return false
         }
     }
-    
-    func clearCurrNum() {
-        currentNum = "0"
-    }
-    
-    func clearCalc(){
-        currentNum = "0"
-        firstArg = ""
-        secondArg = ""
-        operationArg = ""
-        countParam = 0
-        currResult = 0
-        answerWindow.text = "0"
-    }
+   
     
     
     
     @IBAction func otherButtons(_ sender: UIButton) {
-        if (sender.tag == 20){
-            clearCalc()
-        }
+        
     }
     
     
