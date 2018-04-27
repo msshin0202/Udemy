@@ -11,10 +11,12 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var numOnScreen: UILabel!
-    var numCumulator : String = ""
-    var resultCumulator : String = ""
     var performingCalc : Bool = false
-    var previousNum : String = ""
+    var currNum : String = ""
+    var currOperation : String = ""
+    var input : String = ""
+    var output : String = ""
+    
     
     
     override func viewDidLoad() {
@@ -30,45 +32,82 @@ class ViewController: UIViewController {
     }
     @IBAction func numberPressed(_ sender: UIButton) {
         if (numOnScreen.text == "0"){
-            numOnScreen.text = String(sender.tag)
-        } else {
-            numOnScreen.text = numOnScreen.text! + String(sender.tag)
+            currNum = String(sender.tag)
+            numOnScreen.text = currNum
+        } else if (currOperation == ""){
+            currNum = currNum + String(sender.tag)
+            numOnScreen.text = currNum
+        } else if (performingCalc){
+            currNum = currNum + String(sender.tag)
+            numOnScreen.text = currNum
+            performOperation()
+            input = output
+            print(input)
         }
+        
     }
     
     @IBAction func operatorPressed(_ sender: UIButton) {
-        if (isFirstOperation()) {
-            previousNum = numOnScreen.text!
-            
+        switch sender.tag {
+        case 10:
+            currOperation = "/"
+        case 11:
+            currOperation = "x"
+        case 12:
+            currOperation = "-"
+        case 13:
+            currOperation = "+"
+        case 14:
+            currOperation = "="
+            performOperation()
             return
+        default:
+             return
         }
-        else if (sender.tag == 10 && performingCalc == true){
-            resultCumulator = String(Int(previousNum)! / Int(numOnScreen.text!)!)
-            numOnScreen.text = resultCumulator
-            previousNum = resultCumulator
-            return
-        }
-
-        
-        
-    }
-    
-    func isFirstOperation() -> Bool {
-        if (performingCalc == true) {
-            return true
-        } else {
+        if (!performingCalc){
             performingCalc = true
-            return false
+            input = numOnScreen.text!
+            currNum = ""
+        } else {
+            input = numOnScreen.text!
+            currNum = ""
+            if (performingCalc){
+                performOperation()
+            }
         }
     }
-   
     
-    
+    func performOperation() {
+        if (currOperation == "/"){
+            output = String(Float(input)! / Float(numOnScreen.text!)!)
+        }
+        if (currOperation == "x"){
+            output = String(Float(input)! * Float(numOnScreen.text!)!)
+        }
+        if (currOperation == "-"){
+            output = String(Float(input)! - Float(numOnScreen.text!)!)
+        }
+        if (currOperation == "+"){
+            output = String(Float(input)! + Float(numOnScreen.text!)!)
+        }
+        if (currOperation == "="){
+            numOnScreen.text = output
+            input = output
+            output = ""
+        }
+    }
     
     @IBAction func otherButtons(_ sender: UIButton) {
+        if (sender.tag == 20){
+            numOnScreen.text = "0"
+            currNum = ""
+            currOperation = ""
+            input = ""
+            output = ""
+            performingCalc = false
+        }
         
     }
-    
     
 }
 
