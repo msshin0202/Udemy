@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var currOperation : String = ""
     var input : String = ""
     var output : String = ""
+    var finishNumInput : Bool = false
     
     
     
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func numberPressed(_ sender: UIButton) {
+        
         if (numOnScreen.text == "0"){
             currNum = String(sender.tag)
             numOnScreen.text = currNum
@@ -40,9 +42,10 @@ class ViewController: UIViewController {
         } else if (performingCalc){
             currNum = currNum + String(sender.tag)
             numOnScreen.text = currNum
+            print("input before perform: \(input)")
+            print("output before perform: \(output)")
             performOperation()
             input = output
-            print(input)
         }
         
     }
@@ -69,7 +72,8 @@ class ViewController: UIViewController {
             input = numOnScreen.text!
             currNum = ""
         } else {
-            input = numOnScreen.text!
+            numOnScreen.text = output
+            input = output
             currNum = ""
             if (performingCalc){
                 performOperation()
@@ -79,21 +83,22 @@ class ViewController: UIViewController {
     
     func performOperation() {
         if (currOperation == "/"){
-            output = String(Float(input)! / Float(numOnScreen.text!)!)
+            output = String(Double(input)! / Double(numOnScreen.text!)!)
+            print("input in perform operation: \(input)")
+            print("output in perform operation: \(output)")
         }
         if (currOperation == "x"){
-            output = String(Float(input)! * Float(numOnScreen.text!)!)
+            output = String(Double(input)! * Double(numOnScreen.text!)!)
         }
         if (currOperation == "-"){
-            output = String(Float(input)! - Float(numOnScreen.text!)!)
+            output = String(Double(input)! - Double(numOnScreen.text!)!)
         }
         if (currOperation == "+"){
-            output = String(Float(input)! + Float(numOnScreen.text!)!)
+            output = String(Double(input)! + Double(numOnScreen.text!)!)
         }
         if (currOperation == "="){
             numOnScreen.text = output
             input = output
-            output = ""
         }
     }
     
